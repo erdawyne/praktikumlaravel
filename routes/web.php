@@ -32,3 +32,5 @@ Route::post('/mahasiswa/{id}/update', [App\Http\Controllers\MahasiswaController:
 Route::get('/mahasiswa/delete/{id}', [App\Http\Controllers\MahasiswaController::class,'delete']);
 
 Route::get('/mahasiswa/exportpdf', [App\Http\Controllers\MahasiswaController::class,'exportPdf']);
+
+Route::get('/pegawai',[App\Http\Controllers\PegawaiController::class,'index']);
