@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/mahasiswa">Mahasiswa</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pegawai">Pegawai</a>
+                    </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
@@ -63,6 +66,7 @@
         </div>
     </nav>
 </head>
+
 @extends('layouts.app')
 @section('content')
 <body>

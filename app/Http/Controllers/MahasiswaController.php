@@ -5,16 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\DB;
 
 
 class MahasiswaController extends Controller
 {
+    /*public function paginate()
+    {
+        $data_mahasiswa = DB::table('mahasiswa')->paginate(5);
+
+        return view('mahasiswa', ['data_mahasiswa' => $data_mahasiswa]);
+    }*/
+
     public function index(Request $request)
     {
+        //$data_mahasiswa = DB::table('mahasiswa')->paginate(5);
+
         if($request->has('cari')){
             $data_mahasiswa = \App\Models\Mahasiswa::where('nama','LIKE','%'.$request->cari . '%')->get();
         }else{
-            $data_mahasiswa = \App\Models\Mahasiswa::all();
+            $data_mahasiswa = \App\Models\Mahasiswa::paginate(8);
         }
 
         return view('mahasiswa.index',['data_mahasiswa' => $data_mahasiswa]);
