@@ -121,6 +121,12 @@
                             </tr>
                         </tbody>
                     @endforeach
+                    </table>
+                        Current Page: {{ $data_mahasiswa->currentPage() }}<br>
+                        Jumlah Data: {{ $data_mahasiswa->total() }}<br>
+                        Data perhalaman: {{ $data_mahasiswa->perPage() }}<br>
+                    <br>
+                        {{$data_mahasiswa->links()}}
                 </table>
             </div>
         </div>

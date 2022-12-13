@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\GoogleController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +38,7 @@ Route::get('/mahasiswa/delete/{id}', [App\Http\Controllers\MahasiswaController::
 Route::get('/mahasiswa/exportpdf', [App\Http\Controllers\MahasiswaController::class,'exportPdf']);
 
 Route::get('/pegawai',[App\Http\Controllers\PegawaiController::class,'index']);
+
+Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
+
+Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
