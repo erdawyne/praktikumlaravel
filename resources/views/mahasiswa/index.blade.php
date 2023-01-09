@@ -67,8 +67,6 @@
     </nav>
 </head>
 
-@extends('layouts.app')
-@section('content')
 <body>
     <div class="container mt-3">
         @if (session('Sukses'))
@@ -83,10 +81,12 @@
             </div>
 
             {{--form search data--}}
-            <div class="col-5 my-4">
-                <form class="d-flex" role="search">
-                    <input name="cari" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+            <div class="col-4 my-4">
+                @csrf
+                <form class="d-flex" action="/mahasiswa/cari" method="GET">
+                    <input class="form-control me-2" type="text" name="cari"
+                    placeholder="Cari data mahasiswa .." value="{{ old('cari') }}">
+                    <button class="btn btn-outline-success" type="submit">Cari</button>
                 </form>
             </div>
             <div class="col-3 my-4" align="right">
@@ -95,6 +95,14 @@
                 Tambah Data
                 </button>
             </div>
+            @if ($mahasiswa->count() > 0)
+            @else
+            <center>
+                <font color="red">
+                    <h3>!! Tidak ditemukan data yang sesuai dengan kata kunci !!</h3>
+                </font>
+            </center>
+            @endif
             <div class="table-responsive">
                 <table class="table table table-hover">
                     <thead>
@@ -106,7 +114,7 @@
                             <th>AKSI</th>
                         </tr>
                     </thead>
-                    @foreach ($data_mahasiswa as $mahasiswa)
+                    @foreach ($mahasiswa as $mahasiswa)
                         <tbody>
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
@@ -121,13 +129,9 @@
                             </tr>
                         </tbody>
                     @endforeach
-                    </table>
-                        Current Page: {{ $data_mahasiswa->currentPage() }}<br>
-                        Jumlah Data: {{ $data_mahasiswa->total() }}<br>
-                        Data perhalaman: {{ $data_mahasiswa->perPage() }}<br>
-                    <br>
-                        {{$data_mahasiswa->links()}}
                 </table>
+                    
+                        
             </div>
         </div>
     </div>
@@ -169,6 +173,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"crossorigin="anonymous"></script>
 </body>
-@endsection
+
 
 </html>

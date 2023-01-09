@@ -10,24 +10,42 @@ use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
-    /*public function paginate()
+    public function index()
     {
-        $data_mahasiswa = DB::table('mahasiswa')->paginate(5);
+                //Mengambil data dari tabel pegawai
+            $mahasiswa = DB::table('mahasiswa')->paginate(5);
 
-        return view('mahasiswa', ['data_mahasiswa' => $data_mahasiswa]);
-    }*/
 
-    public function index(Request $request)
+                //Mengirim data mahasiswa ke view index
+            return view('mahasiswa.index',['mahasiswa' => $mahasiswa]);
+    }
+
+    // public function index(Request $request)
+    // {
+    //     //$data_mahasiswa = DB::table('mahasiswa')->paginate(5);
+
+    //     if($request->has('cari')){
+    //         $data_mahasiswa = \App\Models\Mahasiswa::where('nama','LIKE','%'.$request->cari . '%')->get();
+    //     }else{
+    //         $data_mahasiswa = \App\Models\Mahasiswa::paginate(8);
+    //     }
+
+    //     return view('mahasiswa.index',['data_mahasiswa' => $data_mahasiswa]);
+    // }
+
+    public function cari(Request $request)
     {
-        //$data_mahasiswa = DB::table('mahasiswa')->paginate(5);
+        //menangkap data pencarian
+        $cari = $request->cari;
 
-        if($request->has('cari')){
-            $data_mahasiswa = \App\Models\Mahasiswa::where('nama','LIKE','%'.$request->cari . '%')->get();
-        }else{
-            $data_mahasiswa = \App\Models\Mahasiswa::paginate(8);
-        }
+        //mengambil data dari table mahasiswa sesuai pencarian data
+        $mahasiswa = DB::table('mahasiswa')
+        ->where('nama','like',"%".$cari."%")
+        ->paginate();
 
-        return view('mahasiswa.index',['data_mahasiswa' => $data_mahasiswa]);
+
+        //mengirim data pegawai ke view index
+        return view('mahasiswa.index',['mahasiswa' => $mahasiswa]);
     }
 
     public function create(Request $request)
